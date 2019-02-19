@@ -1,7 +1,7 @@
 # Личный проект «Большое путешествие» [![Build status][travis-image]][travis-url]
 
 * Студент: [Equi Librium](https://up.htmlacademy.ru/ecmascript/8/user/130134).
-* Наставник: Владимир Коршунов.
+* Наставник: [Владимир Коршунов](https://htmlacademy.ru/profile/id83596).
 
 ---
 
