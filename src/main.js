@@ -5,7 +5,7 @@ const FILTERS = [`Everything`, `Future`, `Past`];
 const START_POINTS_COUNT = 7;
 const DEFAULT_ACTIVE_FILTER_INDEX = 0;
 
-const getRandomValue = (min, max) => Math.floor(Math.random() * (max - min + 1));
+const getRandomValue = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 const getFiltersHtml = (filtersData) => {
   return filtersData.map((it, i) => {
