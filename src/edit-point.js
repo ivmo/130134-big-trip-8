@@ -1,23 +1,23 @@
 const getRandomValue = (max, min = 0) => Math.floor(Math.random() * (max - min)) + min;
-const getRandomDate = (pointDate) => pointDate + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000;
-const getConvertedDate = (dataTask) => new Date(getRandomDate(dataTask));
-
-const getRandomArrayItem = (array) => array[Math.floor(Math.random() * array.length)];
-const getPointType = (pointType) => {
-  const typeArray = Object.keys(pointType);
-  return getRandomArrayItem(typeArray);
-};
+// const getRandomDate = (pointDate) => pointDate + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000;
+// const getConvertedDate = (dataTask) => new Date(getRandomDate(dataTask));
+//
+// const getRandomArrayItem = (array) => array[Math.floor(Math.random() * array.length)];
+// const getPointType = (pointType) => {
+//   const typeArray = Object.keys(pointType);
+//   return getRandomArrayItem(typeArray);
+// };
 
 const shuffle = (arr) => {
-	let j;
+  let j;
   let temp;
-	for(let i = arr.length - 1; i > 0; i--){
-		j = Math.floor(Math.random()*(i + 1));
-		temp = arr[j];
-		arr[j] = arr[i];
-		arr[i] = temp;
-	}
-	return arr;
+  for (let i = arr.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = arr[j];
+    arr[j] = arr[i];
+    arr[i] = temp;
+  }
+  return arr;
 };
 
 const getDescription = (dataPointsDescription) => {
@@ -33,7 +33,6 @@ const createElement = (template) => {
 };
 
 const getPictures = (links) => {
-  const getPicItem = () => `<img src="http://picsum.photos/330/140?r=${Math.random()}" alt="picture from place" class="point__destination-image">`;
   const pictureItems = links.map((it) => `<img src="${it}" alt="picture from place" class="point__destination-image">)`).join(``);
   return pictureItems;
 };
