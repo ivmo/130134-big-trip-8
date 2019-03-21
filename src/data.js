@@ -1,4 +1,4 @@
-const point = {
+const pointData = {
   type: {
     'Taxi': `🚕`,
     'Bus': `🚌`,
@@ -35,4 +35,4 @@ const point = {
   price: `160`,
 };
 
-export default point;
+export default pointData;

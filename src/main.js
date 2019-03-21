@@ -1,6 +1,7 @@
-import point from './data.js';
+import pointData from './data.js';
 import renderFilter from './make-filter.js';
-import renderPoint from './make-point.js';
+import Point from './make-point.js';
+import EditPoint from './edit-point.js';
 
 const FILTERS = [`Everything`, `Future`, `Past`];
 const START_POINTS_COUNT = 7;
@@ -24,13 +25,37 @@ const getArrayPoints = (pointItem, pointsCount) => {
   return pointsDataArray;
 };
 
-getArrayPoints(point, START_POINTS_COUNT);
+getArrayPoints(pointData, START_POINTS_COUNT);
 
-const pointsListElement = document.querySelector(`.trip-day__items`);
+const pointsContainer = document.querySelector(`.trip-day__items`);
+
+const getPoint = (pointDataItem) => {
+  const pointComponent = new Point(pointDataItem);
+  const editPointComponent = new EditPoint(pointDataItem);
+
+
+  pointComponent.onEdit = () => {
+    editPointComponent.render();
+    pointsContainer.replaceChild(editPointComponent.element, pointComponent.element);
+    pointComponent.unrender();
+  };
+
+  editPointComponent.onSubmit = () => {
+    pointComponent.render();
+    pointsContainer.replaceChild(pointComponent.element, editPointComponent.element);
+    editPointComponent.unrender();
+  };
+
+  return pointComponent.render();
+};
 
 const makePoints = (arrayPointsData) => {
-  const pointsArray = arrayPointsData.map((it) => renderPoint(it));
-  pointsListElement.innerHTML = pointsArray.join(``);
+  pointsContainer.innerHTML = ``;
+  const fragment = document.createDocumentFragment();
+  arrayPointsData.forEach((it) => {
+    fragment.appendChild(getPoint(it));
+  });
+  pointsContainer.appendChild(fragment);
 };
 
 makePoints(pointsDataArray);
@@ -38,7 +63,7 @@ makePoints(pointsDataArray);
 
 const filterClickHandler = function (evt) {
   if (evt.target.classList.contains(`trip-filter__item`)) {
-    getArrayPoints(point, getRandomValue(10, 1));
+    getArrayPoints(pointData, getRandomValue(10, 1));
     makePoints(pointsDataArray);
   }
 };

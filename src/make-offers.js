@@ -7,7 +7,7 @@ const getOfferHtml = (offerTitle, price) => `
 const getRandomValue = (max, min = 0) => Math.floor(Math.random() * (max - min)) + min;
 
 const getOffersTitle = (offerData) => {
-  const offers = Array.from(offerData.offers);
+  const offers = Array.from(offerData);
   const newOffers = [];
   for (let i = 0; i < getRandomValue(3); i++) {
     const randomIndex = Math.floor(Math.random() * offers.length);
@@ -17,8 +17,8 @@ const getOffersTitle = (offerData) => {
   return newOffers;
 };
 
-const makeOffers = (pointData) => {
-  const offersTitleArray = getOffersTitle(pointData);
+const makeOffers = (pointDataOffer) => {
+  const offersTitleArray = getOffersTitle(pointDataOffer);
   const price = getRandomValue(550, 10);
   return offersTitleArray.map((it) => {
     return getOfferHtml(it, price);
