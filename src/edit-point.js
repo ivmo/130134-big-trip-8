@@ -1,5 +1,3 @@
-import makeOffers from './make-offers.js';
-
 const getRandomValue = (max, min = 0) => Math.floor(Math.random() * (max - min)) + min;
 const getRandomDate = (pointDate) => pointDate + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000;
 const getConvertedDate = (dataTask) => new Date(getRandomDate(dataTask));
@@ -10,16 +8,34 @@ const getPointType = (pointType) => {
   return getRandomArrayItem(typeArray);
 };
 
-const getTransport = (dataPointType) => {
-  const pointType = getPointType(dataPointType);
-  return `<i class="trip-icon">${dataPointType[pointType]}</i>
-  <h3 class="trip-point__title">${pointType}`;
+const shuffle = (arr) => {
+	let j;
+  let temp;
+	for(let i = arr.length - 1; i > 0; i--){
+		j = Math.floor(Math.random()*(i + 1));
+		temp = arr[j];
+		arr[j] = arr[i];
+		arr[i] = temp;
+	}
+	return arr;
+};
+
+const getDescription = (dataPointsDescription) => {
+  const pointsDescription = dataPointsDescription.split(`. `);
+  const description = shuffle(pointsDescription);
+  return description.slice(getRandomValue(3, 1)).join(`. `);
 };
 
 const createElement = (template) => {
   const newElement = document.createElement(`div`);
   newElement.innerHTML = template;
   return newElement.firstChild;
+};
+
+const getPictures = (links) => {
+  const getPicItem = () => `<img src="http://picsum.photos/330/140?r=${Math.random()}" alt="picture from place" class="point__destination-image">`;
+  const pictureItems = links.map((it) => `<img src="${it}" alt="picture from place" class="point__destination-image">)`).join(``);
+  return pictureItems;
 };
 
 class EditPoint {
@@ -51,7 +67,7 @@ class EditPoint {
     return this._element;
   }
 
-  get template () {
+  get template() {
     return `
     <article class="point">
       <form action="" method="get">
@@ -153,13 +169,9 @@ class EditPoint {
           </section>
           <section class="point__destination">
             <h3 class="point__details-title">Destination</h3>
-            <p class="point__destination-text">Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.</p>
+            <p class="point__destination-text">${getDescription(this._description)}</p>
             <div class="point__destination-images">
-              <img src="http://picsum.photos/330/140?r=123" alt="picture from place" class="point__destination-image">
-              <img src="http://picsum.photos/300/200?r=1234" alt="picture from place" class="point__destination-image">
-              <img src="http://picsum.photos/300/100?r=12345" alt="picture from place" class="point__destination-image">
-              <img src="http://picsum.photos/200/300?r=123456" alt="picture from place" class="point__destination-image">
-              <img src="http://picsum.photos/100/300?r=1234567" alt="picture from place" class="point__destination-image">
+              ${getPictures(this._pictures)}
             </div>
           </section>
           <input type="hidden" class="point__total-price" name="total-price" value="">
