@@ -1,4 +1,4 @@
-import {createElement, getRandomValue, getRandomDate, getConvertedDate, getRandomArrayItem, getPointType} from './utils.js';
+import {getRandomValue, getConvertedDate, getRandomArrayItem, getPointType} from './utils.js';
 import Component from './component.js';
 import makeOffers from './make-offers.js';
 

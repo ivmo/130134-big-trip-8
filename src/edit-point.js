@@ -1,4 +1,4 @@
-import {getRandomValue, suffle, createElement, getDescription} from './utils.js';
+import {getDescription} from './utils.js';
 import Component from './component.js';
 
 

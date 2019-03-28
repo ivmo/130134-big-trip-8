@@ -14,16 +14,16 @@ export const createElement = (template) => {
   return newElement.firstChild;
 };
 
-export const shuffle = (arr) => {
+const shuffle = (array) => {
   let j;
   let temp;
-  for (let i = arr.length - 1; i > 0; i--) {
+  for (let i = array.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
-    temp = arr[j];
-    arr[j] = arr[i];
-    arr[i] = temp;
+    temp = array[j];
+    array[j] = array[i];
+    array[i] = temp;
   }
-  return arr;
+  return array;
 };
 
 export const getDescription = (dataPointsDescription) => {

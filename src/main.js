@@ -9,7 +9,6 @@ const START_POINTS_COUNT = 7;
 const DEFAULT_ACTIVE_FILTER_INDEX = 0;
 
 
-
 const getFiltersHtml = (filtersData) => {
   return filtersData.map((it, i) => {
     return i === DEFAULT_ACTIVE_FILTER_INDEX ? renderFilter(it, true) : renderFilter(it);
