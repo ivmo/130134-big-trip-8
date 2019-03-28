@@ -1,10 +1,11 @@
+import {getRandomValue} from './utils.js';
+
 const getOfferHtml = (offerTitle, price) => `
   <li>
     <button class="trip-point__offer">${offerTitle} +&euro;&nbsp;${price}</button>
   </li>
 `;
 
-const getRandomValue = (max, min = 0) => Math.floor(Math.random() * (max - min)) + min;
 
 const getOffersTitle = (offerData) => {
   const offers = Array.from(offerData);

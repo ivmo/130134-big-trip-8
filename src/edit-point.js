@@ -1,44 +1,15 @@
-const getRandomValue = (max, min = 0) => Math.floor(Math.random() * (max - min)) + min;
-// const getRandomDate = (pointDate) => pointDate + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000;
-// const getConvertedDate = (dataTask) => new Date(getRandomDate(dataTask));
-//
-// const getRandomArrayItem = (array) => array[Math.floor(Math.random() * array.length)];
-// const getPointType = (pointType) => {
-//   const typeArray = Object.keys(pointType);
-//   return getRandomArrayItem(typeArray);
-// };
+import {getRandomValue, suffle, createElement, getDescription} from './utils.js';
+import Component from './component.js';
 
-const shuffle = (arr) => {
-  let j;
-  let temp;
-  for (let i = arr.length - 1; i > 0; i--) {
-    j = Math.floor(Math.random() * (i + 1));
-    temp = arr[j];
-    arr[j] = arr[i];
-    arr[i] = temp;
-  }
-  return arr;
-};
-
-const getDescription = (dataPointsDescription) => {
-  const pointsDescription = dataPointsDescription.split(`. `);
-  const description = shuffle(pointsDescription);
-  return description.slice(getRandomValue(3, 1)).join(`. `);
-};
-
-const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-  return newElement.firstChild;
-};
 
 const getPictures = (links) => {
   const pictureItems = links.map((it) => `<img src="${it}" alt="picture from place" class="point__destination-image">)`).join(``);
   return pictureItems;
 };
 
-class EditPoint {
+class EditPoint extends Component {
   constructor(data) {
+    super();
     this._type = data.type;
     this._city = data.city;
     this._pictures = data.pictures;
@@ -47,7 +18,6 @@ class EditPoint {
     this._dueDate = data.dueDate;
     this._price = data.price;
 
-    this._element = null;
     this._onSubmit = null;
   }
 
@@ -62,9 +32,6 @@ class EditPoint {
     this._onSubmit = fn;
   }
 
-  get element() {
-    return this._element;
-  }
 
   get template() {
     return `
@@ -180,16 +147,6 @@ class EditPoint {
     `.trim();
   }
 
-  render() {
-    this._element = createElement(this.template);
-    this.bindEvents();
-    return this._element;
-  }
-
-  unrender() {
-    this.unbindEvents();
-    this._element = null;
-  }
 
   bindEvents() {
     this._element.querySelector(`form`).addEventListener(`submit`, this._onSubmitButtonClick.bind(this));
